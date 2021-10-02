@@ -42,9 +42,11 @@ const Navbar = () => {
                 Add
               </div>
               </Link> 
+              <Link to="/">
               <div className="navbar-item is-size-5 has-text-weight-semibold">
                 Features
               </div>
+              </Link>
             </div>
           </div>
         </div>
