@@ -9,11 +9,11 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
-          {/* <Link to="/"> */}
-          <a className="navbar-item" >
+         <Link to="/"> 
+          <div className="navbar-item" >
               <h1>Content Manager</h1>
-            </a>
-              {/* </Link> */}
+            </div>
+             </Link> 
             <span className="navbar-burger burger" data-target="navbarMenu">
               <span></span>
               <span></span>
@@ -30,21 +30,21 @@ const Navbar = () => {
                   </span>
                 </div>
               </div>
-              {/* <Link to="/"> */}
-              <a className="navbar-item is-active is-size-5 has-text-weight-semibold">
+              <Link to="/">
+              <div className="navbar-item is-active is-size-5 has-text-weight-semibold">
                 Home
-              </a>
-              {/* </Link> */}
+              </div>
+              </Link> 
 
-              {/* <Link to="/resources/new"> */}
-              <a
+              <Link to="/resources/new">
+              <div
                   className="navbar-item is-size-5 has-text-weight-semibold">
                 Add
-              </a>
-              {/* </Link> */}
-              <a className="navbar-item is-size-5 has-text-weight-semibold">
+              </div>
+              </Link> 
+              <div className="navbar-item is-size-5 has-text-weight-semibold">
                 Features
-              </a>
+              </div>
             </div>
           </div>
         </div>

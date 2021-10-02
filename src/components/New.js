@@ -1,7 +1,7 @@
 //fn component in most cases
 //TODO look up when to use class component
 import Layout from './Layout';
-import axios from "axios";
+//import axios from "axios";
 import { useState } from 'react';
 
 const DEFAULT_DATA = {
@@ -46,14 +46,16 @@ const New = () => {
         }).then(response => {
             if (response.status >= 200 && response.status < 300) {
                 return response;
-                console.log(response);
-                window.location.reload();
+                // console.log(response);
+                // window.location.reload();
               } else {
                console.log('Somthing happened wrong');
               }
         }).catch(err => err);
            // .then(response => this.setState({ articleId: response.data.id }));
       }
+
+     
 
     const resetForm = () => setForm(DEFAULT_DATA);
 

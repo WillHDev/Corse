@@ -1,7 +1,7 @@
 
 // import './App.css';
-import React, { useState, useEffect } from 'react'
-import moduleName from 'module'
+import React from 'react'
+
 import 'bulma/css/bulma.min.css';
 import './styles/globals.css'
 import Layout from './components/Layout'
@@ -11,26 +11,26 @@ import NewsLetter from './components/NewsLetter'
 import Footer from './components/Footer'
 
 
-const data2 = [
-  {
-      id: "1",
-      title: "Learning Singleton Pattern",
-      description: "I would like to learn singleton in JS language because it's important for my job",
-      link: "https://link.com",
-      proiority: 3,
-      timeToFinish: 120,
-    status: "active"
-  },
-  {
-      id: "2",
-      title: "Resouce 2 Description",
-      description: "I would like to learn singleton in JS language because it's important for my job",
-      link: "https://link.com",
-      proiority: 2,
-      timeToFinish: 60,
-    status: "inactive"
-  }
-];
+//const data2 = [
+//   {
+//       id: "1",
+//       title: "Learning Singleton Pattern",
+//       description: "I would like to learn singleton in JS language because it's important for my job",
+//       link: "https://link.com",
+//       proiority: 3,
+//       timeToFinish: 120,
+//     status: "active"
+//   },
+//   {
+//       id: "2",
+//       title: "Resouce 2 Description",
+//       description: "I would like to learn singleton in JS language because it's important for my job",
+//       link: "https://link.com",
+//       proiority: 2,
+//       timeToFinish: 60,
+//     status: "inactive"
+//   }
+// ];
 
 
 
