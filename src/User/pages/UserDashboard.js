@@ -3,12 +3,12 @@
 import React from 'react'
 
 import 'bulma/css/bulma.min.css';
-import './styles/globals.css'
-import Layout from './Shared/components/Layout'
-import ResourceHighlight from './Shared/components/ResourceHighlight'
-import ResourceList from './Shared/components/ResourceList'
-import NewsLetter from './Shared/components/NewsLetter'
-import Footer from './Shared/components/Footer'
+import '../../styles/globals.css'
+import Layout from '../../Shared/components/Layout'
+import ResourceHighlight from '../../Shared/components/ResourceHighlight'
+import ResourceList from '../../Shared/components/ResourceList'
+import NewsLetter from '../../Shared/components/NewsLetter'
+import Footer from '../../Shared/components/Footer'
 
 
 //const data2 = [
@@ -34,7 +34,7 @@ import Footer from './Shared/components/Footer'
 
 
 
-class App extends React.Component {
+class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {resources: []};
@@ -79,7 +79,7 @@ class App extends React.Component {
 
 
 
-export default App;
+export default UserDashboard;
 
 
 
