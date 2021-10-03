@@ -5,7 +5,7 @@ import Layout from '../../Shared/components/Layout';
 import { useState } from 'react';
 //import Dropdown from './Dropdown';
 import DropCustom from '../../Shared/components/DropCustom';
-import _default from 'atob';
+//import _default from 'atob';
 
 
 const DEFAULT_DATA = {
@@ -121,11 +121,11 @@ console.log(form);
                                             <label className="label">Description</label>
                                             <div className="control">
                                                 <textarea 
-                                                value={form.description}
+                                                value={task.description}
                                                 onChange={handleChange}
                                                 name="description"
                                                 className="textarea" 
-                                                placeholder="Learn these technologies because they are very popular and enable better SEO">
+                                           >
                                                 </textarea>
                                         </div>
                                         </div>
@@ -207,3 +207,4 @@ console.log(form);
 }
 
 export default UpdateTaskForm;
+//Learn these technologies because they are very popular and enable better SEO"

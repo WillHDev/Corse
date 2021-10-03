@@ -3,7 +3,7 @@
 
 import { useParams } from 'react-router-dom'
 
-import UpdateTaskForm from '../components/UpdateTaskForm';
+import TwoUpdateTaskForm from '../components/TwoUpdateTaskForm';
 
 const DEFAULT_DATA = {
     title: "Some Title",
@@ -91,7 +91,7 @@ const options = [
     }
         return (<div>
             <h1>Update Task</h1>
-            <UpdateTaskForm task={identifiedTask}/>
+            <TwoUpdateTaskForm task={identifiedTask}/>
             </div>)
     
    
