@@ -10,6 +10,42 @@ import {
 import { useForm } from '../../Shared/hooks/form-hook';
 import './PlaceForm.css';
 
+
+const DUMMY_TASKS = [
+  {
+      id: "1",
+      title: "Learning Singleton Pattern",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 3,
+      timeToFinish: 120,
+      status: "active",
+      creator: "u1",
+      assignedTo:"u1"
+  },
+  {
+      id: "2",
+      title: "Resouce 2 Description",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 2,
+      timeToFinish: 60,
+      status: "inactive",
+      creator: "u2",
+      assignedTo:"u1"
+  },
+  {
+      id: "3",
+      title: "Resource 3 Description",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 1,
+      timeToFinish: 30,
+      status: "inactive",
+      creator: "u2",
+      assignedTo:"u2"
+  }
+]
 const DUMMY_PLACES = [
   {
     id: '1',
@@ -39,10 +75,10 @@ const DUMMY_PLACES = [
   }
 ];
 
-const UpdatePlace = () => {
+const UpdateTask = () => {
   const [isLoading, setIsLoading] = useState(true);
   //TODO: fix this
-  const placeId = useParams().taskId;
+  const taskId = useParams().taskId;
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -53,39 +89,55 @@ const UpdatePlace = () => {
       description: {
         value: '',
         isValid: false
+      },
+      priority: {
+        value: '',
+        isValid: false
+      },
+      assignedTo: {
+        value: '',
+        isValid: false
       }
     },
     false
   );
 
-  const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
+  const identifiedTask = DUMMY_TASKS.find(t => t.id === taskId);
 
   useEffect(() => {
     setFormData(
       {
         title: {
-          value: identifiedPlace.title,
+          value: identifiedTask.title,
           isValid: true
         },
         description: {
-          value: identifiedPlace.description,
+          value: identifiedTask.description,
           isValid: true
+        },
+        priority: {
+          value: 1,
+          isValid: false
+        },
+        assignedTo: {
+          value: '',
+          isValid: false
         }
       },
       true
     );
     setIsLoading(false);
-  }, [setFormData, identifiedPlace]);
+  }, [setFormData, identifiedTask]);
 
   const placeUpdateSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
   };
 
-  if (!identifiedPlace) {
+  if (!identifiedTask) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <h2>Could not find task</h2>
       </div>
     );
   }
@@ -121,11 +173,32 @@ const UpdatePlace = () => {
         initialValue={formState.inputs.description.value}
         initialValid={formState.inputs.description.isValid}
       />
+      {/* TODO fix priority so must not be erased before proceeding, also switch for selector */}
+       <Input
+        id="priority"
+        element="textarea"
+        label="Priority"
+        validators={[VALIDATOR_MINLENGTH(0)]}
+        errorText="Please enter a valid priority (min. 5 characters)."
+        onInput={inputHandler}
+        initialValue={formState.inputs.priority.value}
+        initialValid={formState.inputs.priority.isValid}
+      />
+       <Input
+        id="assignedTo"
+        element="textarea"
+        label="AssignedTo"
+        validators={[VALIDATOR_MINLENGTH(2)]}
+        errorText="Please select team member(s) to assign task (min. 5 characters)."
+        onInput={inputHandler}
+        initialValue={formState.inputs.assignedTo.value}
+        initialValid={formState.inputs.assignedTo.isValid}
+      />
       <Button type="submit" disabled={!formState.isValid}>
-        UPDATE PLACE
+        UPDATE TASK
       </Button>
     </form>
   );
 };
 
-export default UpdatePlace;
+export default UpdateTask;
