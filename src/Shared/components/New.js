@@ -13,9 +13,23 @@ const DEFAULT_DATA = {
     link: "",
     priority:"2",
     timeToFinish: 60,
-    creator: "u3"
+    creator: "u3",
+    assignedTo: "u2"
 }
 
+const options = [
+    { label: "Brad", value: "Brad" },
+    { label: "Chad", value: "mango" },
+    { label: "Drew", value: "strawberry" },
+  ];
+
+// const options = [
+//     { label: "Grapes 🍇", value: "grapes" },
+//     { label: "Mango 🥭", value: "mango" },
+//     { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+//   ];
+
+  
 const New = () => {
     const [ form, setForm ] = useState(DEFAULT_DATA);
 
@@ -40,7 +54,7 @@ const New = () => {
         // })
        
         //axios.post('http://localhost:8080/api/resources', form);
-
+console.log(form);
         return fetch('http://localhost:8080/api/resources', {
             method: 'POST',
             body: JSON.stringify(form),
@@ -155,7 +169,13 @@ const New = () => {
                                         </div>
                                         <p className="help">Time in minutes</p>
                                     </div>
-                                    <div className="field">  <DropCustom /></div>
+                                    <div className="field">  
+                                    <DropCustom
+                                     options={options} 
+                                     value={form.assignedTo}
+                                     onChange={handleChange}
+                                     name="assignedTo"/>
+                                    </div>
                                     <div className="field is-grouped">
                                         <div className="control">
                                             <button 
