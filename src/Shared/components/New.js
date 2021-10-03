@@ -3,13 +3,17 @@
 import Layout from './Layout';
 //import axios from "axios";
 import { useState } from 'react';
+//import Dropdown from './Dropdown';
+import DropCustom from './DropCustom';
+
 
 const DEFAULT_DATA = {
     title: "Some Title",
     description: "",
     link: "",
     priority:"2",
-    timeToFinish: 60
+    timeToFinish: 60,
+    creator: "u3"
 }
 
 const New = () => {
@@ -76,10 +80,12 @@ const New = () => {
     
     return (
             <Layout>
+                <div>
                 <div className="container">
                     <div className="columns">
                         <div className="column is-8 is-offset-2">
                             <div className="resource-form">
+                               
                                 <h1 className="title">Add New Resource</h1>
                                     <form>
                                         <div className="field">
@@ -149,6 +155,7 @@ const New = () => {
                                         </div>
                                         <p className="help">Time in minutes</p>
                                     </div>
+                                    <div className="field">  <DropCustom /></div>
                                     <div className="field is-grouped">
                                         <div className="control">
                                             <button 
@@ -156,6 +163,8 @@ const New = () => {
                                             onClick={submitForm}
                                             className="button is-link">Submit</button>
                                         </div>
+                                       
+                                      
                                         <div className="control">
                                             <button 
                                             type="button"
@@ -168,7 +177,8 @@ const New = () => {
                         </div>
                     </div>
                 </div>
-           
+                
+                </div>
             </Layout>
     )
 }
