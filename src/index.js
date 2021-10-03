@@ -16,13 +16,13 @@ ReactDOM.render(
   <BrowserRouter>
 
 <Switch>
-    <Route path="/">
+    <Route exact path="/">
        <App />
     </Route>
-    <Route path="/resources/new">
+    <Route exact path="/resources/new">
       <New />
      </Route>
-     <Route path="/:userId/tasks">
+     <Route exact path="/:userId/tasks">
       <UserDashboard />
      </Route>
     {/* <Route exact path="/">

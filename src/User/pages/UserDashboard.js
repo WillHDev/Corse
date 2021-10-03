@@ -1,6 +1,7 @@
 
 // import './App.css';
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 
 import 'bulma/css/bulma.min.css';
 import '../../styles/globals.css'
@@ -46,7 +47,12 @@ class UserDashboard extends React.Component {
     const data = await response.json();
     //Probably needs to specify
     // console.log(data);
-    this.setState({ resources: data })
+    const userId = this.props.match.params.userId;
+    console.log(userId);
+    const userTasks = data.filter( task => task.creator === userId);
+    console.log(userTasks);
+    this.setState({ resources: userTasks });
+
   }
   
 //
@@ -79,7 +85,7 @@ class UserDashboard extends React.Component {
 
 
 
-export default UserDashboard;
+export default withRouter(UserDashboard);
 
 
 
