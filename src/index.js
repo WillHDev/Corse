@@ -8,9 +8,10 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import New from "./Shared/components/New";
+import NewTask from './Tasks/pages/NewTask';
 //import UserTasks from './User/components/UserTasks';
 import UserDashboard from './User/pages/UserDashboard';
+import UpdateTask from './Tasks/pages/UpdateTask';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,11 +20,14 @@ ReactDOM.render(
     <Route exact path="/">
        <App />
     </Route>
-    <Route exact path="/resources/new">
-      <New />
-     </Route>
      <Route exact path="/:userId/tasks">
       <UserDashboard />
+     </Route>
+     <Route exact path="/tasks/new">
+      <NewTask />
+     </Route>
+     <Route exact path="/tasks/:taskId">
+      <UpdateTask />
      </Route>
     {/* <Route exact path="/">
         <Users />

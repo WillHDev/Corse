@@ -1,10 +1,10 @@
 //fn component in most cases
 //TODO look up when to use class component
-import Layout from './Layout';
+import Layout from '../../Shared/components/Layout';
 //import axios from "axios";
 import { useState } from 'react';
 //import Dropdown from './Dropdown';
-import DropCustom from './DropCustom';
+import DropCustom from '../../Shared/components/DropCustom';
 
 
 const DEFAULT_DATA = {
@@ -30,7 +30,7 @@ const options = [
 //   ];
 
   
-const New = () => {
+const NewTask = () => {
     const [ form, setForm ] = useState(DEFAULT_DATA);
 
     // const submitForm = () => {
@@ -203,4 +203,4 @@ console.log(form);
     )
 }
 
-export default New;
+export default NewTask;

@@ -36,7 +36,7 @@ const Navbar = () => {
               </div>
               </Link> 
 
-              <Link to="/resources/new">
+              <Link to="/tasks/new">
               <div
                   className="navbar-item is-size-5 has-text-weight-semibold">
                 Add
