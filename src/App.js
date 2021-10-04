@@ -15,14 +15,24 @@ import UserDashboard from './User/pages/UserDashboard';
 import UpdateTask from './Tasks/pages/UpdateTask';
 import Auth from './User/pages/Auth';
 import TasksDisplay from './Tasks/pages/TasksDisplay';
-import AuthContext from 'auth-context.js';
+import { AuthContext } from './Shared/context/auth-context.js';
 
 
 const App = () => {
 
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
+  //wrap with useCallBack to avoid infinite loops
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+  }, []);
+
   return (
-    <AuthContext.Provider>
+    <AuthContext.Provider  value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}>
   <BrowserRouter>
 <Switch>
     <Route exact path="/">
@@ -46,7 +56,7 @@ const App = () => {
         </Switch>
   
     </BrowserRouter>
-    </AuthContext>
+    </AuthContext.Provider>
     );
   };
 
