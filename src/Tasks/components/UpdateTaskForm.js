@@ -46,34 +46,34 @@ const DUMMY_TASKS = [
       assignedTo:"u2"
   }
 ]
-const DUMMY_PLACES = [
-  {
-    id: '1',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
-    },
-    creator: 'u1'
-  },
-  {
-    id: '2',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584
-    },
-    creator: 'u2'
-  }
-];
+// const DUMMY_PLACES = [
+//   {
+//     id: '1',
+//     title: 'Empire State Building',
+//     description: 'One of the most famous sky scrapers in the world!',
+//     imageUrl:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+//     address: '20 W 34th St, New York, NY 10001',
+//     location: {
+//       lat: 40.7484405,
+//       lng: -73.9878584
+//     },
+//     creator: 'u1'
+//   },
+//   {
+//     id: '2',
+//     title: 'Empire State Building',
+//     description: 'One of the most famous sky scrapers in the world!',
+//     imageUrl:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+//     address: '20 W 34th St, New York, NY 10001',
+//     location: {
+//       lat: 40.7484405,
+//       lng: -73.9878584
+//     },
+//     creator: 'u2'
+//   }
+// ];
 
 const UpdateTask = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -184,8 +184,9 @@ const UpdateTask = () => {
         id="priority"
         element="textarea"
         label="Priority"
-        validators={[VALIDATOR_MINLENGTH(0)]}
-        errorText="Please enter a valid priority (min. 5 characters)."
+        validators={[VALIDATOR_REQUIRE()]}
+        //validators={[VALIDATOR_MINLENGTH(1)]}
+        errorText="Please enter a valid priority (choose a number 1-5)."
         onInput={inputHandler}
         initialValue={formState.inputs.priority.value}
         initialValid={formState.inputs.priority.isValid}
@@ -194,8 +195,9 @@ const UpdateTask = () => {
         id="assignedTo"
         element="textarea"
         label="AssignedTo"
-        validators={[VALIDATOR_MINLENGTH(2)]}
-        errorText="Please select team member(s) to assign task (min. 5 characters)."
+        validators={[VALIDATOR_REQUIRE()]}
+        //validators={[VALIDATOR_MINLENGTH(2)]}
+        errorText="Please select team member(s) to assign task (min. 2 characters)."
         onInput={inputHandler}
         initialValue={formState.inputs.assignedTo.value}
         initialValid={formState.inputs.assignedTo.isValid}

@@ -45,8 +45,8 @@ class TasksDisplay extends React.Component {
     // GET request using fetch with async/await
     const response = await fetch('http://localhost:8080/api/resources');
     const data = await response.json();
-    //Probably needs to specify
-    console.log(data);
+ 
+
     this.setState({ tasks: data });
     console.log(this.state);
   }

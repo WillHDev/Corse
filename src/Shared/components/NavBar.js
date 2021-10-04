@@ -1,7 +1,11 @@
+import React, { useContext } from 'react';
+
 import {
 
     Link
   } from "react-router-dom";
+
+  import { AuthContext }from '../context/auth-context';
 
 const Navbar = () => {
 
@@ -49,7 +53,7 @@ const Navbar = () => {
               </Link>
               <Link to="/auth">
               <div className="navbar-item is-size-5 has-text-weight-semibold">
-                Authenticate
+                Log In
               </div>
               </Link>
             </div>

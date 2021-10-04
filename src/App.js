@@ -1,16 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import ReactDOM from 'react-dom';
 import {
   BrowserRouter,
   Switch,
   Route
 } from "react-router-dom";
+
 import './index.css';
-
-
-
 import NewTask from './Tasks/pages/NewTask';
-//import UserTasks from './User/components/UserTasks';
 import UserDashboard from './User/pages/UserDashboard';
 import UpdateTask from './Tasks/pages/UpdateTask';
 import Auth from './User/pages/Auth';
