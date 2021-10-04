@@ -3,17 +3,17 @@
 
 import { useParams } from 'react-router-dom'
 
-import TwoUpdateTaskForm from '../components/TwoUpdateTaskForm';
+import UpdateTaskForm from '../components/UpdateTaskForm';
 
-const DEFAULT_DATA = {
-    title: "Some Title",
-    description: "",
-    link: "",
-    priority:"2",
-    timeToFinish: 60,
-    creator: "u3",
-    assignedTo: "u2"
-}
+//const DEFAULT_DATA = {
+//     title: "Some Title",
+//     description: "",
+//     link: "",
+//     priority:"2",
+//     timeToFinish: 60,
+//     creator: "u3",
+//     assignedTo: "u2"
+// }
 
 
 const DUMMY_TASKS = [
@@ -53,11 +53,11 @@ const DUMMY_TASKS = [
 ]
 
 
-const options = [
-    { label: "Brad", value: "Brad" },
-    { label: "Chad", value: "mango" },
-    { label: "Drew", value: "strawberry" },
-  ];
+// const options = [
+//     { label: "Brad", value: "Brad" },
+//     { label: "Chad", value: "mango" },
+//     { label: "Drew", value: "strawberry" },
+//   ];
 
 // const options = [
 //     { label: "Grapes 🍇", value: "grapes" },
@@ -91,7 +91,7 @@ const options = [
     }
         return (<div>
             <h1>Update Task</h1>
-            <TwoUpdateTaskForm task={identifiedTask}/>
+            <UpdateTaskForm task={identifiedTask}/>
             </div>)
     
    

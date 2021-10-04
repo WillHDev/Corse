@@ -1,210 +1,210 @@
-//fn component in most cases
-//TODO look up when to use class component
-import Layout from '../../Shared/components/Layout';
-//import axios from "axios";
-import { useState } from 'react';
-//import Dropdown from './Dropdown';
-import DropCustom from '../../Shared/components/DropCustom';
-//import _default from 'atob';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import Input from '../../Shared/components/FormElements/Input';
+import Button from '../../Shared/components/FormElements/Button';
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MINLENGTH
+} from '../../Shared/util/validators';
+import { useForm } from '../../Shared/hooks/form-hook';
+import './PlaceForm.css';
+import Card from '../../Shared/components/UIElements/Card';
 
-const DEFAULT_DATA = {
-    title: "Some Title",
-    description: "",
-    link: "",
-    priority:"2",
-    timeToFinish: 60,
-    creator: "u3",
-    assignedTo: "u2"
-}
+const DUMMY_TASKS = [
+  {
+      id: "1",
+      title: "Learning Singleton Pattern",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 3,
+      timeToFinish: 120,
+      status: "active",
+      creator: "u1",
+      assignedTo:"u1"
+  },
+  {
+      id: "2",
+      title: "Resouce 2 Description",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 2,
+      timeToFinish: 60,
+      status: "inactive",
+      creator: "u2",
+      assignedTo:"u1"
+  },
+  {
+      id: "3",
+      title: "Resource 3 Description",
+      description: "I would like to learn singleton in JS language because it's important for my job",
+      link: "https://link.com",
+      proiority: 1,
+      timeToFinish: 30,
+      status: "inactive",
+      creator: "u2",
+      assignedTo:"u2"
+  }
+]
+const DUMMY_PLACES = [
+  {
+    id: '1',
+    title: 'Empire State Building',
+    description: 'One of the most famous sky scrapers in the world!',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+    address: '20 W 34th St, New York, NY 10001',
+    location: {
+      lat: 40.7484405,
+      lng: -73.9878584
+    },
+    creator: 'u1'
+  },
+  {
+    id: '2',
+    title: 'Empire State Building',
+    description: 'One of the most famous sky scrapers in the world!',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
+    address: '20 W 34th St, New York, NY 10001',
+    location: {
+      lat: 40.7484405,
+      lng: -73.9878584
+    },
+    creator: 'u2'
+  }
+];
 
-const options = [
-    { label: "Brad", value: "Brad" },
-    { label: "Chad", value: "mango" },
-    { label: "Drew", value: "strawberry" },
-  ];
+const UpdateTask = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  //TODO: fix this
+  const taskId = useParams().taskId;
+  //useForm(initialInputs:, initialFormValidity: any)
 
-// const options = [
-//     { label: "Grapes 🍇", value: "grapes" },
-//     { label: "Mango 🥭", value: "mango" },
-//     { label: "Strawberry 🍓", value: "strawberry", disabled: true },
-//   ];
-
-  
-const UpdateTaskForm = (task) => {
-    const [ form, setForm ] = useState(DEFAULT_DATA);
-    console.log(task);
-
-    // const submitForm = () => {
-    //     //request POST , vs absolute path
-    //     fetch("/api/resources"), {
-                                //^
-    //         body: JSON.stringify(form),
-    //         headers: {"Content-Type": "application/json"},
-    //         method: "POST"
-        
-    //     }
-    // }
-
-    const submitForm = () => {
-
-       // axios.post("/api/resources", form)
-        // fetch("/api/resources", {
-        //   body: JSON.stringify(form),
-        //   headers: {"Content-Type": "application/json"},
-        //   method: "POST"
-        // })
-       
-        //axios.post('http://localhost:8080/api/resources', form);
-console.log(form);
-        return fetch('http://localhost:8080/api/resources', {
-            method: 'POST',
-            body: JSON.stringify(form),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            if (response.status >= 200 && response.status < 300) {
-                return response;
-                // console.log(response);
-                // window.location.reload();
-              } else {
-               console.log('Somthing went wrong');
-              }
-        }).catch(err => err);
-           // .then(response => this.setState({ articleId: response.data.id }));
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      title: {
+        value: '',
+        isValid: false
+      },
+      description: {
+        value: '',
+        isValid: false
+      },
+      priority: {
+        value: '',
+        isValid: false
+      },
+      assignedTo: {
+        value: '',
+        isValid: false
       }
+    },
+    false
+  );
 
-     
+  const identifiedTask = DUMMY_TASKS.find(t => t.id === taskId);
 
-    const resetForm = () => setForm(DEFAULT_DATA);
-
-    const handleChange = (e) => {
-        //console.log("Input is called/changing");
-        //console.log(e.target.value);
-        //console.log("called on:" + e.target.name );
-        const { name, value } = e.target;
-        
-        setForm({ 
-            ...form,
-            [name]: value
-         });
-
-        // console.log(form);
+  useEffect(() => {
+    if (identifiedTask) {
+      setFormData(
+        {
+          title: {
+            value: identifiedTask.title,
+            isValid: true
+          },
+          description: {
+            value: identifiedTask.description,
+            isValid: true
+          },
+          priority: {
+            value: 1,
+            isValid: false
+          },
+          assignedTo: {
+            value: identifiedTask.assignedTo,
+            isValid: false
+          }
+        },
+        true
+      );
     }
-    //console.log(form);
-    
-    return (
-            <Layout>
-                <div>
-                <div className="container">
-                    <div className="columns">
-                        <div className="column is-8 is-offset-2">
-                            <div className="resource-form">
-                               
-                                <h1 className="title">Add New Resource</h1>
-                                    <form>
-                                        <div className="field">
-                                            <label className="label">Title</label>
-                                            <div className="control">
-                                                <input 
-                                                value={task.title}
-                                                onChange={handleChange}
-                                                name="title"
-                                                className="input" 
-                                                type="text" 
-                                                placeholder={task.title}
-                                                />
-                                        </div>
-                                    </div>
-                                        <div className="field">
-                                            <label className="label">Description</label>
-                                            <div className="control">
-                                                <textarea 
-                                                value={task.description}
-                                                onChange={handleChange}
-                                                name="description"
-                                                className="textarea" 
-                                           >
-                                                </textarea>
-                                        </div>
-                                        </div>
-                                    <div className="field">
-                                            <label className="label">Link</label>
-                                            <div className="control">
-                                                <input 
-                                                value={form.link}
-                                                onChange={handleChange}
-                                                name="link"
-                                                className="input" 
-                                                type="text" 
-                                                placeholder="https://academylink.com" />
-                                        </div>
-                                    </div>
-                                    <div className="field">
-                                        <label className="label">Priority</label>
-                                        <div className="control">
-                                            <div className="select">
-                                            <select 
-                                            value={form.priority}
-                                            onChange={handleChange}
-                                            name="priority"
-                                            >
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    <div className="field">
-                                            <label className="label">Time to Finish</label>
-                                            <div className="control">
-                                                <input
-                                                value={form.timeToFinish}
-                                                onChange={handleChange}
-                                                name="timeToFinish"
-                                                 className="input" 
-                                                 type="number" 
-                                                 placeholder="60 (Time is in minutes)" />
-                                        </div>
-                                        <p className="help">Time in minutes</p>
-                                    </div>
-                                    <div className="field">  
-                                    <DropCustom
-                                     options={options} 
-                                     value={form.assignedTo}
-                                     onChange={handleChange}
-                                     name="assignedTo"/>
-                                    </div>
-                                    <div className="field is-grouped">
-                                        <div className="control">
-                                            <button 
-                                            type="button"
-                                            onClick={submitForm}
-                                            className="button is-link">Submit</button>
-                                        </div>
-                                       
-                                      
-                                        <div className="control">
-                                            <button 
-                                            type="button"
-                                            onClick={resetForm}
-                                            className="button is-link is-light">Cancel</button>
-                                        </div>
-                                        </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-            </Layout>
-    )
-}
+    setIsLoading(false);
+  }, [setFormData, identifiedTask]);
 
-export default UpdateTaskForm;
-//Learn these technologies because they are very popular and enable better SEO"
+  const taskUpdateSubmitHandler = event => {
+    event.preventDefault();
+    console.log(formState.inputs);
+  };
+
+  if (!identifiedTask) {
+    return (
+      <div className="center">
+        <Card>
+        <h2>Could not find task</h2>
+        </Card>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="center">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
+  return (
+    formState.inputs.title.value && (
+    <form className="place-form" onSubmit={taskUpdateSubmitHandler}>
+      <Input
+        id="title"
+        element="input"
+        type="text"
+        label="Title"
+        validators={[VALIDATOR_REQUIRE()]}
+        errorText="Please enter a valid title."
+        onInput={inputHandler}
+        initialValue={formState.inputs.title.value}
+        initialValid={formState.inputs.title.isValid}
+      />
+      <Input
+        id="description"
+        element="textarea"
+        label="Description"
+        validators={[VALIDATOR_MINLENGTH(5)]}
+        errorText="Please enter a valid description (min. 5 characters)."
+        onInput={inputHandler}
+        initialValue={formState.inputs.description.value}
+        initialValid={formState.inputs.description.isValid}
+      />
+      {/* TODO fix priority so must not be erased before proceeding, also switch for selector */}
+       <Input
+        id="priority"
+        element="textarea"
+        label="Priority"
+        validators={[VALIDATOR_MINLENGTH(0)]}
+        errorText="Please enter a valid priority (min. 5 characters)."
+        onInput={inputHandler}
+        initialValue={formState.inputs.priority.value}
+        initialValid={formState.inputs.priority.isValid}
+      />
+       <Input
+        id="assignedTo"
+        element="textarea"
+        label="AssignedTo"
+        validators={[VALIDATOR_MINLENGTH(2)]}
+        errorText="Please select team member(s) to assign task (min. 5 characters)."
+        onInput={inputHandler}
+        initialValue={formState.inputs.assignedTo.value}
+        initialValid={formState.inputs.assignedTo.isValid}
+      />
+      <Button type="submit" disabled={!formState.isValid}>
+        UPDATE TASK
+      </Button>
+    </form>
+  ));
+};
+
+export default UpdateTask;

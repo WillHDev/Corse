@@ -12,6 +12,7 @@ import NewTask from './Tasks/pages/NewTask';
 //import UserTasks from './User/components/UserTasks';
 import UserDashboard from './User/pages/UserDashboard';
 import UpdateTask from './Tasks/pages/UpdateTask';
+import Auth from './User/pages/Auth';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -28,6 +29,9 @@ ReactDOM.render(
      </Route>
      <Route exact path="/tasks/:taskId">
       <UpdateTask />
+     </Route>
+     <Route exact path="/auth">
+      <Auth />
      </Route>
     {/* <Route exact path="/">
         <Users />

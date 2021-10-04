@@ -47,6 +47,11 @@ const Navbar = () => {
                 Features
               </div>
               </Link>
+              <Link to="/auth">
+              <div className="navbar-item is-size-5 has-text-weight-semibold">
+                Authenticate
+              </div>
+              </Link>
             </div>
           </div>
         </div>
