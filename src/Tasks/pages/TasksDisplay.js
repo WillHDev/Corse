@@ -1,15 +1,15 @@
 
 // import './App.css';
 import React from 'react'
-import { withRouter } from 'react-router-dom';
 
 import 'bulma/css/bulma.min.css';
-//import '../../styles/globals.css'
+//import './styles/globals.css'
 import Layout from '../../Shared/components/Layout'
 import ResourceHighlight from '../../Shared/components/ResourceHighlight'
-import ResourceList from '../../Tasks/components/ResourceList'
+import ResourceList from '../components/ResourceList'
 import NewsLetter from '../../Shared/components/NewsLetter'
 import Footer from '../../Shared/components/Footer'
+
 
 
 //const data2 = [
@@ -35,10 +35,10 @@ import Footer from '../../Shared/components/Footer'
 
 
 
-class UserDashboard extends React.Component {
+class TasksDisplay extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {resources: []};
+    this.state = {tasks: []};
   }
 
   async componentDidMount() {
@@ -46,35 +46,31 @@ class UserDashboard extends React.Component {
     const response = await fetch('http://localhost:8080/api/resources');
     const data = await response.json();
     //Probably needs to specify
-    // console.log(data);
-    const userId = this.props.match.params.userId;
-    console.log(userId);
-    const userTasks = data.filter( task => task.creator === userId);
-    console.log(userTasks);
-    this.setState({ resources: userTasks });
-
+    console.log(data);
+    this.setState({ tasks: data });
+    console.log(this.state);
   }
   
 //
   render() {
-    const { resources } = this.state;
+    const { tasks } = this.state;
     return (
-      <div className="App">
+      <div >
        
-      <header className="App-header">
+     
       <>
         <Layout>
          <ResourceHighlight 
-            resources={resources.slice(2)}
+            resources={tasks.slice(2)}
        />   
          <NewsLetter /> 
         <ResourceList 
-            resources={resources.slice(0,2)}
+            tasks={tasks.slice(0,2)}
         /> 
         <Footer />
         </Layout>
      </>
-      </header>
+      
       
     </div>
     );
@@ -85,7 +81,7 @@ class UserDashboard extends React.Component {
 
 
 
-export default withRouter(UserDashboard);
+export default TasksDisplay;
 
 
 

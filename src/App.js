@@ -1,81 +1,54 @@
-
-// import './App.css';
-import React from 'react'
-
-import 'bulma/css/bulma.min.css';
-import './styles/globals.css'
-import Layout from './Shared/components/Layout'
-import ResourceHighlight from './Shared/components/ResourceHighlight'
-import ResourceList from './Tasks/components/ResourceList'
-import NewsLetter from './Shared/components/NewsLetter'
-import Footer from './Shared/components/Footer'
-
-
-//const data2 = [
-//   {
-//       id: "1",
-//       title: "Learning Singleton Pattern",
-//       description: "I would like to learn singleton in JS language because it's important for my job",
-//       link: "https://link.com",
-//       proiority: 3,
-//       timeToFinish: 120,
-//     status: "active"
-//   },
-//   {
-//       id: "2",
-//       title: "Resouce 2 Description",
-//       description: "I would like to learn singleton in JS language because it's important for my job",
-//       link: "https://link.com",
-//       proiority: 2,
-//       timeToFinish: 60,
-//     status: "inactive"
-//   }
-// ];
+import React, { useState, useCallback } from 'react';
+import ReactDOM from 'react-dom';
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from "react-router-dom";
+import './index.css';
 
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {tasks: []};
-  }
+import NewTask from './Tasks/pages/NewTask';
+//import UserTasks from './User/components/UserTasks';
+import UserDashboard from './User/pages/UserDashboard';
+import UpdateTask from './Tasks/pages/UpdateTask';
+import Auth from './User/pages/Auth';
+import TasksDisplay from './Tasks/pages/TasksDisplay';
+import AuthContext from 'auth-context.js';
 
-  async componentDidMount() {
-    // GET request using fetch with async/await
-    const response = await fetch('http://localhost:8080/api/resources');
-    const data = await response.json();
-    //Probably needs to specify
-    console.log(data);
-    this.setState({ tasks: data });
-    console.log(this.state);
-  }
+
+const App = () => {
+
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  return (
+    <AuthContext.Provider>
+  <BrowserRouter>
+<Switch>
+    <Route exact path="/">
+       <TasksDisplay />
+    </Route>
+     <Route exact path="/:userId/tasks">
+      <UserDashboard />
+     </Route>
+     <Route exact path="/tasks/new">
+      <NewTask />
+     </Route>
+     <Route exact path="/tasks/:taskId">
+      <UpdateTask />
+     </Route>
+     <Route exact path="/auth">
+      <Auth />
+     </Route>
+    {/* <Route exact path="/">
+        <Users />
+      </Route> */}
+        </Switch>
   
-//
-  render() {
-    const { tasks } = this.state;
-    return (
-      <div className="App">
-       
-      <header className="App-header">
-      <>
-        <Layout>
-         <ResourceHighlight 
-            resources={tasks.slice(2)}
-       />   
-         <NewsLetter /> 
-        <ResourceList 
-            tasks={tasks.slice(0,2)}
-        /> 
-        <Footer />
-        </Layout>
-     </>
-      </header>
-      
-    </div>
+    </BrowserRouter>
+    </AuthContext>
     );
-  }
-}
-
+  };
 
 
 
