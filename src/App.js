@@ -6,7 +6,7 @@ import 'bulma/css/bulma.min.css';
 import './styles/globals.css'
 import Layout from './Shared/components/Layout'
 import ResourceHighlight from './Shared/components/ResourceHighlight'
-import ResourceList from './Shared/components/ResourceList'
+import ResourceList from './Tasks/components/ResourceList'
 import NewsLetter from './Shared/components/NewsLetter'
 import Footer from './Shared/components/Footer'
 
@@ -37,7 +37,7 @@ import Footer from './Shared/components/Footer'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {resources: []};
+    this.state = {tasks: []};
   }
 
   async componentDidMount() {
@@ -45,13 +45,14 @@ class App extends React.Component {
     const response = await fetch('http://localhost:8080/api/resources');
     const data = await response.json();
     //Probably needs to specify
-    // console.log(data);
-    this.setState({ resources: data })
+    console.log(data);
+    this.setState({ tasks: data });
+    console.log(this.state);
   }
   
 //
   render() {
-    const { resources } = this.state;
+    const { tasks } = this.state;
     return (
       <div className="App">
        
@@ -59,11 +60,11 @@ class App extends React.Component {
       <>
         <Layout>
          <ResourceHighlight 
-            resources={resources.slice(2)}
+            resources={tasks.slice(2)}
        />   
          <NewsLetter /> 
         <ResourceList 
-            resources={resources.slice(0,2)}
+            tasks={tasks.slice(0,2)}
         /> 
         <Footer />
         </Layout>

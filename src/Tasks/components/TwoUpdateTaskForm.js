@@ -9,7 +9,7 @@ import {
 } from '../../Shared/util/validators';
 import { useForm } from '../../Shared/hooks/form-hook';
 import './PlaceForm.css';
-
+import Card from '../../Shared/components/UIElements/Card';
 
 const DUMMY_TASKS = [
   {
@@ -79,6 +79,7 @@ const UpdateTask = () => {
   const [isLoading, setIsLoading] = useState(true);
   //TODO: fix this
   const taskId = useParams().taskId;
+  //useForm(initialInputs:, initialFormValidity: any)
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -105,31 +106,33 @@ const UpdateTask = () => {
   const identifiedTask = DUMMY_TASKS.find(t => t.id === taskId);
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedTask.title,
-          isValid: true
+    if (identifiedTask) {
+      setFormData(
+        {
+          title: {
+            value: identifiedTask.title,
+            isValid: true
+          },
+          description: {
+            value: identifiedTask.description,
+            isValid: true
+          },
+          priority: {
+            value: 1,
+            isValid: false
+          },
+          assignedTo: {
+            value: '',
+            isValid: false
+          }
         },
-        description: {
-          value: identifiedTask.description,
-          isValid: true
-        },
-        priority: {
-          value: 1,
-          isValid: false
-        },
-        assignedTo: {
-          value: '',
-          isValid: false
-        }
-      },
-      true
-    );
+        true
+      );
+    }
     setIsLoading(false);
   }, [setFormData, identifiedTask]);
 
-  const placeUpdateSubmitHandler = event => {
+  const taskUpdateSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
   };
@@ -137,7 +140,9 @@ const UpdateTask = () => {
   if (!identifiedTask) {
     return (
       <div className="center">
+        <Card>
         <h2>Could not find task</h2>
+        </Card>
       </div>
     );
   }
@@ -151,7 +156,8 @@ const UpdateTask = () => {
   }
 
   return (
-    <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+    formState.inputs.title.value && (
+    <form className="place-form" onSubmit={taskUpdateSubmitHandler}>
       <Input
         id="title"
         element="input"
@@ -198,7 +204,7 @@ const UpdateTask = () => {
         UPDATE TASK
       </Button>
     </form>
-  );
+  ));
 };
 
 export default UpdateTask;

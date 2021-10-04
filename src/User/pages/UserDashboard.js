@@ -7,7 +7,7 @@ import 'bulma/css/bulma.min.css';
 import '../../styles/globals.css'
 import Layout from '../../Shared/components/Layout'
 import ResourceHighlight from '../../Shared/components/ResourceHighlight'
-import ResourceList from '../../Shared/components/ResourceList'
+import ResourceList from '../../Tasks/components/ResourceList'
 import NewsLetter from '../../Shared/components/NewsLetter'
 import Footer from '../../Shared/components/Footer'
 
