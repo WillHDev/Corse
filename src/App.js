@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route, 
+  Redirect
 } from "react-router-dom";
 
 import './index.css';
@@ -27,30 +28,50 @@ const App = () => {
     setIsLoggedIn(false);
   }, []);
 
+  let routes;
+
+  if (isLoggedIn) {
+    routes = (
+      <React.Fragment>
+         <Route exact path="/">
+            <TasksDisplay />
+        </Route>
+        <Route exact path="/:userId/tasks">
+            <UserDashboard />
+        </Route>
+        <Route exact path="/:userId/tasks">
+           <UserDashboard />
+           </Route>
+        <Route exact path="/tasks/new">
+            <NewTask />
+          </Route>
+       <Route exact path="/tasks/:taskId">
+            <UpdateTask />
+          </Route>
+     <Redirect to="/"/>
+      </React.Fragment>
+    );
+  } else {
+    routes = (
+      <React.Fragment>
+        <Route exact path="/">
+          <TasksDisplay />
+        </Route>
+         <Route exact path="/:userId/tasks">
+            <UserDashboard />
+         </Route>
+       <Route exact path="/auth">
+         <Auth />
+      </Route>
+      <Redirect to="/auth"/>
+   </React.Fragment>
+    );
+  }
+
   return (
     <AuthContext.Provider  value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}>
   <BrowserRouter>
-<Switch>
-    <Route exact path="/">
-       <TasksDisplay />
-    </Route>
-     <Route exact path="/:userId/tasks">
-      <UserDashboard />
-     </Route>
-     <Route exact path="/tasks/new">
-      <NewTask />
-     </Route>
-     <Route exact path="/tasks/:taskId">
-      <UpdateTask />
-     </Route>
-     <Route exact path="/auth">
-      <Auth />
-     </Route>
-    {/* <Route exact path="/">
-        <Users />
-      </Route> */}
-        </Switch>
-  
+      <Switch>{routes}</Switch>
     </BrowserRouter>
     </AuthContext.Provider>
     );
