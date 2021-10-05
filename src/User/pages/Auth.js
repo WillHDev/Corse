@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, {
+     useState,
+     useContext 
+    } from 'react';
 
 import Card from '../../Shared/components/UIElements/Card';
 import Input from '../../Shared/components/FormElements/Input';
 import Button from '../../Shared/components/FormElements/Button';
+import Layout from '../../Shared/components/Layout';
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -16,6 +20,7 @@ import './Auth.css';
 
 
 const Auth = () => {
+    const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -59,10 +64,14 @@ const Auth = () => {
   const authSubmitHandler = event => {
     event.preventDefault();
     console.log(formState.inputs);
+    auth.login();
   };
 
   return (
-    <Card className="authentication">
+    <div>
+           <Layout />
+        <Card className="authentication">
+       
       <h2>Login Required</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
@@ -103,6 +112,7 @@ const Auth = () => {
         SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
       </Button>
     </Card>
+    </div>
   );
 };
 
