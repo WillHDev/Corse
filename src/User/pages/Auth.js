@@ -9,7 +9,11 @@ import {
   VALIDATOR_REQUIRE
 } from '../../Shared/util/validators';
 import { useForm } from '../../Shared/hooks/form-hook';
+import { AuthContext } from '../../Shared/context/auth-context';
+
+
 import './Auth.css';
+
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);

@@ -9,6 +9,8 @@ import {
 
 const Navbar = () => {
 
+  const auth = useContext(AuthContext);
+
     return (
       <nav className="navbar">
         <div className="container">
@@ -40,22 +42,21 @@ const Navbar = () => {
               </div>
               </Link> 
 
+              {auth.isLoggedIn && (
+                 <React.Fragment>
               <Link to="/tasks/new">
-              <div
-                  className="navbar-item is-size-5 has-text-weight-semibold">
+                <div className="navbar-item is-size-5 has-text-weight-semibold">
                 Add
-              </div>
-              </Link> 
-              <Link to="/">
-              <div className="navbar-item is-size-5 has-text-weight-semibold">
-                Features
-              </div>
-              </Link>
-              <Link to="/auth">
-              <div className="navbar-item is-size-5 has-text-weight-semibold">
-                Log In
-              </div>
-              </Link>
+                  </div>
+                </Link> 
+                  <Link to="/auth">
+                     <div className="navbar-item is-size-5 has-text-weight-semibold">
+                 Log In
+               </div>
+               </Link>
+               </React.Fragment>
+              )}
+
             </div>
           </div>
         </div>

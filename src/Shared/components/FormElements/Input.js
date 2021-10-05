@@ -78,3 +78,10 @@ const Input = props => {
 };
 
 export default Input;
+
+// case 'TOUCH': {
+//   return {
+//     ...state,
+//     isTouched: true
+//   }
+// }
