@@ -1,3 +1,6 @@
+import React, {useContext} from 'react';
+import { AuthContext } from '../context/auth-context';
+
 import {
 
     Link
@@ -5,10 +8,14 @@ import {
 
 const Navbar = () => {
 
+  const auth = useContext(AuthContext);
+
+
     return (
       <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
+
          <Link to="/"> 
           <div className="navbar-item" >
               <h1>Content Manager</h1>
@@ -35,21 +42,25 @@ const Navbar = () => {
                 Home
               </div>
               </Link> 
-
-              <Link to="/tasks/new">
-              <div
-                  className="navbar-item is-size-5 has-text-weight-semibold">
-                Add
-              </div>
-              </Link> 
-              <Link to="/">
-              <div className="navbar-item is-size-5 has-text-weight-semibold">
-                Features
-              </div>
-              </Link>
+ {auth.isLoggedIn && (
+   <div>
+        <Link to="/tasks/new">
+        <div
+            className="navbar-item is-size-5 has-text-weight-semibold">
+          Add
+        </div>
+        </Link> 
+        <Link to="/">
+        <div className="navbar-item is-size-5 has-text-weight-semibold">
+          Features
+        </div>
+        </Link>
+        </div>
+      )}
+             
               <Link to="/auth">
               <div className="navbar-item is-size-5 has-text-weight-semibold">
-                Authenticate
+               Log In
               </div>
               </Link>
             </div>
